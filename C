@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+int main()
+{
+    // FILE *f1,*f2;
+    // char name[50];
+    // int year;
+    // f1 = fopen("human.txt", "r");
+    // f2 = fopen("human2.txt", "w");
+    // if (f1 == NULL || f2 == NULL) {
+    //     printf("ошибка\n");
+    //     return 1;
+    // }
+    // while(fscanf(f1,"%s", name) != EOF) {
+    //     fscanf(f1,"%s", name);
+    //     fscanf(f1,"%d", &year);
+    //     if (year > 1980) {
+    //         fprintf(f2, "%s %d\n",name,year);
+    //         printf("%s %d\n",name,year);
+    //     }
+    // }
+    
+    // fclose(f1);
+    // fclose(f2);
+    // return 0;
+    FILE *file,*f2;
+    char line[100]; // Буфер для считывания строки
+    int year;
+    file = fopen("human.txt", "r"); // Открываем файл для чтения
+    f2 = fopen("human2.txt", "w");
+    if (file == NULL) {
+       printf("Ошибка открытия файла.\n");
+       return 1;
+    }
+
+    // Считывание и вывод данных построчно
+    while (fgets(line, sizeof(line), file) != NULL) {
+        if (line[-1,-4]>=1980) {
+            fprintf(f2, "%s %d\n",line,year);
+            printf("%s %d\n",line,year);
+        }
+    
+    }
+
+    fclose(file); // Закрываем файл
+
+    return 0;
+}
