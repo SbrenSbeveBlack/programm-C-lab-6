@@ -2,25 +2,23 @@
 
 int main() {
     FILE *input, *output;
+    char line[200];
     char I[50], F[50], O[50];
     int birthYear;
 
-    // Открываем файл для чтения
     input = fopen("human.txt", "r");
 
-    // Открываем файл для записи
     output = fopen("human2.txt", "w");
 
-    // Читаем данные из файла и записываем нужные строки в другой файл
     printf("Результат:\n");
-    while (fscanf(input, "%s %s %s %d", F, I, O, &birthYear) == 4) {
-        if (birthYear > 1980) {
-            fprintf(output, "%s %s %s %d\n", F, I, O, birthYear);
-            printf("%s %s %s %d\n", F, I, O, birthYear);
+    while (fgets(line, sizeof(line), input) != NULL) {
+        if (sscanf(line, "%s %s %s %d", F, I, O, &birthYear) == 4) {
+            if (birthYear > 1980) {
+                fprintf(output, "%s %s %s %d\n", F, I, O, birthYear);
+                printf("%s %s %s %d\n", F, I, O, birthYear);
+            }
         }
     }
-
-    // Закрываем файлы
     fclose(input);
     fclose(output);
     
